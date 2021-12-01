@@ -42,14 +42,14 @@ func countIncrease(filename string) int {
 	}
 	defer file.Close()
 
-	window := CreateMeasurements()
+	measurements := CreateMeasurements()
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		depth, error := strconv.Atoi(scanner.Text())
 		if error != nil {
 			log.Fatal(error)
 		}
-		if window.Push(depth) {
+		if measurements.Push(depth) {
 			count++
 		}
 	}
