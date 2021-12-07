@@ -57,10 +57,11 @@ func (s *StringListNode) BitCount() int {
 type StringLister interface {
 	Append(string)
 	Filter(int, byte)
-	MostCommonBit(int)
-	LeastCommonBit(int)
-	BitCount()
-	Size()
+	MostCommonBit(int) byte
+	LeastCommonBit(int) byte
+	BitCount() int
+	Size() int
+	Copy() StringList
 }
 
 type StringList struct {
@@ -136,6 +137,14 @@ func (s StringList) Size() int {
 	return s.size
 }
 
+func (s *StringList) Copy() StringList {
+	out := StringList{nil, 0}
+	for i := s.head; i != nil; i = i.next {
+		out.Append(i.data)
+	}
+	return out
+}
+
 func getLineArray(filename string) StringList {
 	var bytearray StringList
 	file, err := os.Open(filename)
@@ -175,7 +184,7 @@ func oxygenGeneratorRating(byteArray StringList) int {
 		if byteArray.Size() == 1 {
 			return binaryStringToInt(byteArray.head.data)
 		}
-		fmt.Println("array size", byteArray.Size())
+		//fmt.Println("array size", byteArray.Size())
 	}
 	return 0
 }
@@ -187,18 +196,17 @@ func CO2ScrubberRating(byteArray StringList) int {
 		if byteArray.Size() == 1 {
 			return binaryStringToInt(byteArray.head.data)
 		}
-		fmt.Println("array size", byteArray.Size())
+		//fmt.Println("array size", byteArray.Size())
 	}
 	return 0
 }
 
 func main() {
 	input := getLineArray(os.Args[1])
-	fmt.Println("InputLines:", input.Size())
-	ogr := oxygenGeneratorRating(input)
+	//fmt.Println("InputLines:", input.Size())
+	ogr := oxygenGeneratorRating(input.Copy())
 	fmt.Println("ogr:", ogr)
-	input = getLineArray(os.Args[1])
-	fmt.Println("InputLines:", input.Size())
+	//fmt.Println("InputLines:", input.Size())
 	csr := CO2ScrubberRating(input)
 	fmt.Println("csr:", csr)
 	fmt.Println(ogr * csr)

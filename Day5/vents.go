@@ -132,12 +132,6 @@ func readInput(filename string) int {
 				fmt.Println("error:", line)
 			} else {
 				l := Line{Min(x1, x2), Min(y1, y2), Max(x1, x2), Max(y1, y2)}
-				if l.IsValid() {
-					fmt.Println(l)
-
-				} else {
-					fmt.Println("Invalid:", l)
-				}
 				m.SetLine(&l)
 			}
 
@@ -146,9 +140,6 @@ func readInput(filename string) int {
 		}
 	}
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
 	return m.OverlappingCount()
 }
 

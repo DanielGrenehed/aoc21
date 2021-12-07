@@ -164,9 +164,6 @@ func readInput(filename string) int {
 		}
 	}
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
 	return m.OverlappingCount()
 }
 
