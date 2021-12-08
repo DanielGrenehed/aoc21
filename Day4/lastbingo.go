@@ -127,7 +127,6 @@ func (l *List) MarkBoards(number int) int {
 		if tmp != 0 {
 			l.Remove(c.board)
 			res = tmp
-
 		}
 	}
 	return res
