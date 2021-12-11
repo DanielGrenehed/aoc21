@@ -13,6 +13,7 @@ func readFile(filename string) int {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
 	unique := 0

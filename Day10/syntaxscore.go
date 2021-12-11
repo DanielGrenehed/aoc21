@@ -129,6 +129,7 @@ func scoreFile(filename string) int {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	sum := 0
 	for scanner.Scan() {
