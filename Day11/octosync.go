@@ -153,7 +153,6 @@ func findFlashSync(d *Dumbos) int {
 		}
 		count++
 	}
-	return 0
 }
 
 func ImportDumbos(filename string) *Dumbos {

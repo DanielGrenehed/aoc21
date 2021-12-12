@@ -14,8 +14,6 @@ type Cave struct {
 	is_big bool
 }
 
-// skapa en lista med rum
-
 type Connection struct {
 	a *Cave
 	b *Cave
@@ -114,7 +112,6 @@ func visited(history []Cave, cave Cave) bool {
 }
 
 func (cs *CaveSystem) findEnd(history []Cave) []string {
-	// if little cave appears more than once, skip path
 	current := history[len(history)-1]
 
 	if current.name == "end" {
@@ -124,7 +121,6 @@ func (cs *CaveSystem) findEnd(history []Cave) []string {
 	caves := cs.GetConnected(current.name)
 	var paths []string
 	for _, connection := range caves {
-		// if not litte cave again
 		if connection.is_big || !visited(history, connection) {
 			paths = append(paths, cs.findEnd(append(history, connection))...)
 		}
@@ -146,20 +142,6 @@ func testConnections() {
 	cs.PrintConnections()
 	fmt.Println(cs.GetPaths())
 }
-
-// skapa en lista med länkar mellan rum
-
-/*
-
-	skapa alla kopplingar
-
-	börja sedan på start,
-		för alla kopplingar grottan har,
-			om jag inte har varit där
-
-				gå till den grottan
-
-*/
 
 func loadCaveSystem(filename string) *CaveSystem {
 	file, err := os.Open(filename)
